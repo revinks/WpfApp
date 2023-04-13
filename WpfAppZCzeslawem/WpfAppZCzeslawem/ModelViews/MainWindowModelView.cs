@@ -11,7 +11,7 @@ using WpfAppZCzeslawem.Commands;
 namespace WpfAppZCzeslawem.ModelViews {
     public class MainWindowModelView : INotifyPropertyChanged {
         public MainWindowModelView() {
-            IloczynCommand = new RelayCommand(iloczyn);
+            NWDCommand = new RelayCommand(NWD);
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged(string propertyName) {
@@ -25,12 +25,28 @@ namespace WpfAppZCzeslawem.ModelViews {
                 OnPropertyChanged(nameof(Arg1));
             }
         }
-        public ICommand IloczynCommand { get; set; }
-        public void iloczyn(Object obj) {
-            try {
-
+        private string arg2;
+        public string Arg2 {
+            get { return arg2; }
+            set {
+                arg2 = value;
+                OnPropertyChanged(nameof(Arg2));
             }
-            catch (Exception ex) {
+        }
+        public ICommand NWDCommand { get; set; }
+        public void NWD(object obj) {
+            try {
+                int a = Convert.ToInt32(Arg1);
+                int b = Convert.ToInt32(Arg2);
+                while(a != b) {
+                    if (a > b)
+                        a -= b;
+                    else
+                        b -= a;
+                }
+                lbWynik.Text = $"NWD = {a}";
+            }
+            catch(Exception ex) {
                 MessageBox.Show(ex.Message);
             }
         }
