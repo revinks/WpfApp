@@ -10,12 +10,27 @@ using WpfAppZCzeslawem.Commands;
 
 namespace WpfAppZCzeslawem.ModelViews {
     public class MainWindowModelView : INotifyPropertyChanged {
-        public MainWindowModelView() {
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public MainWindowModelView() 
+        {
+            Wynik = "Wynik = ";
             NWDCommand = new RelayCommand(NWD);
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string propertyName) {
+        public void OnPropertyChanged(string propertyName) 
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private string wynik;
+        public string Wynik
+        {
+            get { return wynik; }
+            set
+            {
+                wynik = value;
+                OnPropertyChanged(nameof(Wynik));
+            }
         }
         private string arg1;
         public string Arg1 {
@@ -44,7 +59,7 @@ namespace WpfAppZCzeslawem.ModelViews {
                     else
                         b -= a;
                 }
-                lbWynik.Text = $"NWD = {a}";
+                Wynik = $"NWD = {a}";
             }
             catch(Exception ex) {
                 MessageBox.Show(ex.Message);

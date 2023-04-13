@@ -4,12 +4,70 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfAppZCzeslawem"
+        xmlns:viewmodel="clr-namespace:WpfAppZCzeslawem.ModelViews"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="400">
+        Title="MainWindow" Height="300" Width="400">
+    <Window.DataContext>
+        <viewmodel:MainWindowModelView/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label 
+            Grid.Column="0"
+            Grid.Row="0"
+            Content="Arg1:"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Margin="5 20 5 20"
+            FontSize="15"/>
+        <Label 
+            Grid.Column="0"
+            Grid.Row="1"
+            Content="Arg2:"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Margin="5 20 5 20"
+            FontSize="15"/>
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="0"
+            Text="{Binding Arg1}"
+            VerticalAlignment="Center"
+            Margin="5 20 40 20"
+            />
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="1"
+            Text="{Binding Arg2}"
+            VerticalAlignment="Center"
+            Margin="5 20 40 20"
+            />
+        <Button
+            Grid.ColumnSpan="2"
+            Grid.Row="2"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Padding="10"
+            Margin="10"
+            Command="{Binding NWDCommand}"
+            Content="Oblicz"
+            CommandParameter="Oblicz"/>
+        <Label
+            Grid.ColumnSpan="2"
+            Grid.Row="3"
+            FontSize="16"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Content="{Binding Wynik}"/>
+    
     </Grid>
 </Window>
